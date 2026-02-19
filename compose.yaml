@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: jobtask-postgres
+    environment:
+      POSTGRES_DB: jobtask
+      POSTGRES_USER: jobtask_user
+      POSTGRES_PASSWORD: jobtask_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: jobtask-app
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/jobtask
+      SPRING_DATASOURCE_USERNAME: jobtask_user
+      SPRING_DATASOURCE_PASSWORD: jobtask_pass
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
