@@ -24,6 +24,11 @@ public class WalletController {
     @PostMapping
     public ResponseEntity<WalletResponse> updateWallet(@RequestBody @Valid WalletRequest request) {
         Wallet wallet;
+
+        if (request.getAmount() <= 0) {
+            throw new IllegalArgumentException("Amount must be greater than zero");
+        }
+
         switch (request.getOperationType()) {
             case DEPOSIT:
                 wallet = walletService.deposit(request.getWalletId(), request.getAmount());

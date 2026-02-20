@@ -1,6 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://postgres:5432/jobtask
 
   jpa:
     hibernate:
@@ -10,6 +11,6 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
-    wallet:
-      optimistic-lock:
-        max-retries: 5
+wallet:
+  optimistic-lock:
+    max-retries: 5

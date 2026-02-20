@@ -44,7 +44,7 @@ public class WalletService {
             try {
                 wallet.withdraw(amount);
             } catch (IllegalStateException e) {
-                throw new InsufficientFundsException();
+                throw new InsufficientFundsException("Not enough money");
             }
 
             return walletRepository.save(wallet);

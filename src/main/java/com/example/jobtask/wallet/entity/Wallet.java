@@ -1,16 +1,14 @@
 package com.example.jobtask.wallet.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Version;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "wallet")
-
+@NoArgsConstructor
 public class Wallet {
 
     @Getter
@@ -18,10 +16,12 @@ public class Wallet {
     private UUID id;
 
     @Getter
+    @Column(nullable = false)
     private Long balance;
 
 
     @Version
+    @Column(nullable = false)
     private Long version;
 
     private Wallet(UUID id, Long balance) {
